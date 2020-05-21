@@ -1,0 +1,23 @@
+ext {
+    printDpdc = this.&printDpdc
+    dpdcLib = this.&dpdcLib
+}
+
+def printDpdc() {
+    for (Map.Entry entry : rootProject.properties) {
+        println(entry.key + " ---> " + entry.value)
+    }
+}
+
+boolean hasPProperty(String key) {
+    return rootProject.hasProperty(key)
+}
+
+def dpdcLib(configureClosure) {
+    if (hasPProperty('shp')) {
+        configureClosure.implementation(rootProject.ext.modules.database)
+    } else {
+        configureClosure.api project(':database')
+    }
+}
+
