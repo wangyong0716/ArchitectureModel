@@ -7,13 +7,11 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 
-import com.archi.database.DbConfig;
-import com.archi.database.DbManager;
-import com.archi.database.TaskManager;
 import com.archi.database.async.AsyncThreadTask;
-import com.archi.database.common.CommonInfo;
-import com.archi.database.common.CommonTask;
+import com.archi.database.common.CommonTable;
+import com.archi.database.common.CommonStoreTask;
 import com.archi.database.info.IInfo;
+import com.archi.database.StorageManager;
 
 import org.json.JSONException;
 
@@ -32,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.display).setOnClickListener(onClickListener);
 
         displayArea = findViewById(R.id.display_area);
-        DbManager.getInstance().setDbConfig(new DbConfig.DBConfigBuilder().setAppContext(getApplicationContext()).build());
+        StorageManager.getInstance().init(this);
+        StorageManager.getInstance().register(new CommonTable());
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.add:
-                    CommonTask.getInstance().save("test at " + System.currentTimeMillis());
+                    CommonStoreTask.getInstance().save("test at " + System.currentTimeMillis());
                     break;
                 case R.id.display:
                     display();
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     final StringBuilder stringBuilder = new StringBuilder();
-                    List<IInfo> infos = CommonTask.getInstance().getAll();
+                    List<IInfo> infos = CommonStoreTask.getInstance().getAll();
                     for (IInfo info : infos) {
                         stringBuilder.append(info.toJson()).append("\n");
                     }

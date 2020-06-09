@@ -28,4 +28,6 @@ public interface IStorage {
     List<IInfo> getData(int index, int count);
 
     String getName();
+
+    String getTableName();
 }

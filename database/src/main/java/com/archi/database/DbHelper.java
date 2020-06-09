@@ -7,11 +7,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.archi.database.table.ITable;
+import com.archi.database.utils.FileUtils;
 import com.archi.log.ArchiLog;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.archi.database.StorageConfig.DEBUG;
@@ -27,7 +27,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String CREATE_TABLE_PREFIX = "CREATE TABLE IF NOT EXISTS ";
 
     private Context appContext;
-    private static List<ITable> mTableList = new ArrayList<>();
     private SQLiteDatabase mDb;
     private boolean isInSdcard;
     private String mDbPath;
@@ -53,7 +52,7 @@ public class DbHelper extends SQLiteOpenHelper {
             path = filesDir;
             ArchiLog.i(TAG, "path1 = " + path);
         } else {
-            String sdDir = DbManager.getInstance().getBasePath(appContext);
+            String sdDir = FileUtils.getDataDir(appContext) + StorageConfig.BASE_DIR_PATH;
             path = sdDir + StorageConfig.DB_NAME;
             ArchiLog.i(TAG, "path2 = " + path);
         }
@@ -62,11 +61,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        ArchiLog.d(SUB_TAG, "创建数据库 onCreate: " + (mTableList == null ? null : mTableList.size()));
+        List<ITable> tableList = StorageManager.getInstance().getTableList();
+        ArchiLog.d(SUB_TAG, "创建数据库 onCreate: " + (tableList == null ? null : tableList.size()));
 
-        if (null == mTableList) return;
+        if (null == tableList) return;
 
-        for (ITable table : mTableList) {
+        for (ITable table : tableList) {
             db.execSQL(table.getCreateSql());
             ArchiLog.d(SUB_TAG, table.getTableName() + " :" + table.getCreateSql());
         }
@@ -129,11 +129,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 ArchiLog.d(TAG, SUB_TAG, "newDbFile ioException : " + Log.getStackTraceString(e));
             }
         }
-    }
-
-    public static void addTable(ITable table) {
-        ArchiLog.d(SUB_TAG, "addTable : " + table.getTableName());
-        mTableList.add(table);
     }
 
     public boolean deleteDBByName(String DBName) {

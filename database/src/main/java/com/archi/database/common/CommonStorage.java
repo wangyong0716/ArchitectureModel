@@ -2,8 +2,8 @@ package com.archi.database.common;
 
 import android.database.Cursor;
 
-import com.archi.database.DbManager;
 import com.archi.database.info.IInfo;
+import com.archi.database.StorageManager;
 import com.archi.database.storage.TableStorage;
 import com.archi.database.utils.IOStreamUtils;
 
@@ -18,12 +18,16 @@ public class CommonStorage extends TableStorage {
     }
 
     @Override
+    public String getTableName() {
+        return "common";
+    }
+
+    @Override
     public List<IInfo> readDb(String selection) {
         List<IInfo> infos = new LinkedList<IInfo>();
         Cursor cursor = null;
         try {
-            cursor = DbManager.getInstance().getDbConfig().appContext.getContentResolver()
-                    .query(getTableUri(), null, selection, null, null);
+            cursor = StorageManager.getInstance().query(getTableName(), selection);
             if (null == cursor || !cursor.moveToFirst()) {
                 IOStreamUtils.closeQuietly(cursor);
                 return infos;

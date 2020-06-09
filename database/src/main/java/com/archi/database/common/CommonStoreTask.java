@@ -1,6 +1,5 @@
 package com.archi.database.common;
 
-import com.archi.database.DbHelper;
 import com.archi.database.async.AsyncThreadTask;
 import com.archi.database.info.IInfo;
 import com.archi.database.storage.IStorage;
@@ -8,16 +7,18 @@ import com.archi.database.task.BaseTask;
 
 import java.util.List;
 
-public class CommonTask extends BaseTask {
-    private static volatile CommonTask sInstance;
+public class CommonStoreTask extends BaseTask {
+    private static volatile CommonStoreTask sInstance;
 
-    private CommonTask(){}
+    private CommonStoreTask() {
+    }
 
-    public static CommonTask getInstance() {
-        if (sInstance ==null) {
-            synchronized (CommonTask.class) {
-                if (sInstance ==null) {}
-                sInstance = new CommonTask();
+    public static CommonStoreTask getInstance() {
+        if (sInstance == null) {
+            synchronized (CommonStoreTask.class) {
+                if (sInstance == null) {
+                }
+                sInstance = new CommonStoreTask();
             }
         }
         return sInstance;
@@ -39,16 +40,12 @@ public class CommonTask extends BaseTask {
             public void run() {
                 CommonInfo commonInfo = new CommonInfo();
                 commonInfo.text = value;
-                CommonTask.getInstance().save(commonInfo);
+                CommonStoreTask.getInstance().save(commonInfo);
             }
         });
     }
 
     public List<IInfo> getAll() {
         return getStorage().getAll();
-    }
-
-    public void init() {
-        DbHelper.addTable(new CommonTable());
     }
 }

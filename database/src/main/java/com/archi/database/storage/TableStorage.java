@@ -1,18 +1,14 @@
 package com.archi.database.storage;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.net.Uri;
 
-import com.archi.database.DbManager;
-import com.archi.database.DbUtil;
 import com.archi.database.info.BaseInfo;
 import com.archi.database.info.IInfo;
+import com.archi.database.StorageManager;
 
 import java.util.List;
 
 public abstract class TableStorage implements IStorage {
-    public static final String TABLE_STORAGE = "TableStorage";
 
     @Override
     public boolean save(IInfo info) {
@@ -21,7 +17,7 @@ public abstract class TableStorage implements IStorage {
             values.put(BaseInfo.KEY_TIME_RECORD, System.currentTimeMillis());
         }
         try{
-            return null != DbManager.getInstance().getDbConfig().appContext.getContentResolver().insert(getTableUri(), values);
+            return StorageManager.getInstance().insert(getTableName(), values);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,14 +84,10 @@ public abstract class TableStorage implements IStorage {
         return null;
     }
 
-    protected Uri getTableUri() {
-        Context c = DbManager.getInstance().getDbConfig().appContext;
-        if (c == null) {
-            return null;
-        }
-        return DbUtil.getTableUri(c.getPackageName(), getName());
+    @Override
+    public String getTableName() {
+        return null;
     }
-
 
     /**
      * 目前按照selection传入sql语句的方法来处理
