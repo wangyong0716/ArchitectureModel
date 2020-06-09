@@ -1,6 +1,7 @@
 #!/bin/bash
 module=(
 "database"
+"log"
 )
 
 for element in ${module[*]}

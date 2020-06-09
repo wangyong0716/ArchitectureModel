@@ -28,6 +28,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation rootProject.ext.support.appcompat
-
-    dpdcLog(getDependencies())
 }

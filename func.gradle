@@ -1,6 +1,7 @@
 ext {
     printDpdc = this.&printDpdc
-    dpdcLib = this.&dpdcLib
+    dpdcDatabase = this.&dpdcDatabase
+    dpdcLog = this.&dpdcLog
 }
 
 def printDpdc() {
@@ -13,11 +14,18 @@ boolean hasPProperty(String key) {
     return rootProject.hasProperty(key)
 }
 
-def dpdcLib(configureClosure) {
+def dpdcLib(configureClosure, lib) {
     if (hasPProperty('shp')) {
         configureClosure.implementation(rootProject.ext.modules.database)
     } else {
-        configureClosure.api project(':database')
+        configureClosure.api project(lib)
     }
 }
 
+def dpdcLog(configureClosure) {
+    dpdcLib(configureClosure, ':log')
+}
+
+def dpdcDatabase(configureClosure) {
+    dpdcLib(configureClosure, ':database')
+}

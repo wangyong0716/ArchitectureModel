@@ -22,5 +22,5 @@ dependencies {
     implementation rootProject.ext.support.appcompat
     implementation rootProject.ext.support.constraintlayout
 
-    dpdcLib(getDependencies())
+    dpdcDatabase(getDependencies())
 }
