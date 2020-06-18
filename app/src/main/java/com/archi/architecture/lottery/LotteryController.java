@@ -42,6 +42,9 @@ public class LotteryController {
 
     public boolean needUpdate() {
         String latestDate = getLatestDate();
+        if (latestDate == null) {
+            return true;
+        }
         String[] latest = latestDate.split("-");
         if (latest.length != 3) {
             return true;
