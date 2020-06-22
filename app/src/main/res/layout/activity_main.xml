@@ -35,6 +35,15 @@
             android:background="#66666666"
             android:gravity="center"
             android:text="DISPLAY"/>
+
+        <TextView
+            android:id="@+id/lottery"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="12dp"
+            android:background="#66666666"
+            android:gravity="center"
+            android:text="LOTTERY"/>
     </LinearLayout>
 
     <TextView

@@ -1,21 +1,18 @@
 package com.archi.architecture;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
-
-import com.archi.architecture.lottery.BackgroundHandler;
-import com.archi.architecture.lottery.LotteryController;
-import com.archi.architecture.lottery.SSLottery;
 import com.archi.architecture.lottery.net.LotteryFetcher;
+import com.archi.architecture.view.LotteryActivity;
 import com.archi.database.async.AsyncThreadTask;
-import com.archi.database.common.CommonTable;
 import com.archi.database.common.CommonStoreTask;
 import com.archi.database.info.IInfo;
-import com.archi.database.StorageManager;
 
 import org.json.JSONException;
 
@@ -33,14 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.display).setOnClickListener(onClickListener);
 
+        findViewById(R.id.lottery).setOnClickListener(onClickListener);
+
         displayArea = findViewById(R.id.display_area);
-
-        LotteryController.getInstance().init(this.getApplicationContext());
-
-        StorageManager.getInstance().init(this);
-        StorageManager.getInstance().register(new CommonTable());
-
-        checkUpdateLottery();
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -53,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.display:
                     display();
+                    break;
+                case R.id.lottery:
+                    Intent intent = new Intent(MainActivity.this, LotteryActivity.class);
+                    startActivity(intent);
                 default:
                     break;
             }
@@ -83,15 +79,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void checkUpdateLottery() {
-        if (LotteryController.getInstance().needUpdate()) {
-            BackgroundHandler.execute(new Runnable() {
-                @Override
-                public void run() {
-                    List<SSLottery> lotteries = LotteryFetcher.getAllSSData();
 
-                }
-            });
-        }
-    }
 }

@@ -32,6 +32,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.LotteryActivity"
+            android:screenOrientation="fullSensor"/>
+
         <service android:name=".server.BookService"
             android:enabled="true"
             android:exported="true">

@@ -1,6 +1,7 @@
 package com.archi.database.storage;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import com.archi.database.info.BaseInfo;
 import com.archi.database.info.IInfo;
@@ -9,6 +10,7 @@ import com.archi.database.StorageManager;
 import java.util.List;
 
 public abstract class TableStorage implements IStorage {
+    private static final String TAG = "TableStorage";
 
     @Override
     public boolean save(IInfo info) {
@@ -62,6 +64,7 @@ public abstract class TableStorage implements IStorage {
 
     @Override
     public List<IInfo> getAll() {
+        Log.i(TAG, "getAll");
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("select * from ").append(getName());
         String sql = stringBuffer.toString();

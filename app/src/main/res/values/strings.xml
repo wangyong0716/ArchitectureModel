@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">architecture</string>
+    <string name="header_date">日期</string>
+    <string name="header_series">期号</string>
+    <string name="header_reds">红球</string>
+    <string name="header_blue">篮球</string>
+    <string name="header_pool_bonus">奖池</string>
+    <string name="header_first_num">一等奖数目</string>
+    <string name="header_first_money">一等奖金额</string>
+    <string name="header_second_num">二等奖数目</string>
+    <string name="header_second_money">二等奖金额</string>
+    <string name="header_sell_money">销售额</string>
 </resources>

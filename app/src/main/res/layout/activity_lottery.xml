@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/control_area"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/bts"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Button
+                android:id="@+id/update"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="UPDATE"
+                android:layout_marginLeft="20dp"/>
+
+            <Button
+                android:id="@+id/refresh"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="REFRESH"
+                android:layout_marginLeft="20dp"/>
+
+            <Button
+                android:id="@+id/random_buy"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="RANDOM"
+                android:layout_marginLeft="20dp"/>
+
+            <Button
+                android:id="@+id/lru_buy"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:text="LRU"
+                android:layout_marginLeft="20dp"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#666666"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"/>
+    <include layout="@layout/item_ssl_header_layout"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"/>
+    <ListView
+        android:id="@+id/display"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
