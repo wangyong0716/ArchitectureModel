@@ -33,7 +33,7 @@
         </activity>
 
         <activity android:name=".view.LotteryActivity"
-            android:screenOrientation="fullSensor"/>
+            android:screenOrientation="landscape"/>
 
         <service android:name=".server.BookService"
             android:enabled="true"

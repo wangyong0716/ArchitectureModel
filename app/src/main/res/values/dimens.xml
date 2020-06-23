@@ -5,4 +5,6 @@
     <dimen name="text_size_middle">12sp</dimen>
     <dimen name="text_size_large">14sp</dimen>
     <dimen name="text_size_huge">16sp</dimen>
+
+    <dimen name="divider_height">1dp</dimen>
 </resources>

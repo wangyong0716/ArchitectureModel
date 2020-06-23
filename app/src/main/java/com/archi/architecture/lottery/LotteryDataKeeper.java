@@ -133,4 +133,17 @@ public class LotteryDataKeeper {
         }
         return lotteries;
     }
+
+    public List<SSLottery> getAfter(int year, int month, int day) {
+        List<SSLottery> lotteries = new ArrayList<>();
+        for (int i = 0; i < mTotalCount; i++) {
+            if (mLotteries.get(i).getYear() > year
+                    || (mLotteries.get(i).getYear() == year && mLotteries.get(i).getMonth() > month)
+                    || (mLotteries.get(i).getYear() == year && mLotteries.get(i).getMonth() == month
+                    && mLotteries.get(i).getDay() >= day)) {
+                lotteries.add(mLotteries.get(i));
+            }
+        }
+        return lotteries;
+    }
 }

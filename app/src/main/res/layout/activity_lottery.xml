@@ -54,17 +54,9 @@
             android:layout_height="1dp"
             android:background="#666666"/>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
-    <include layout="@layout/item_ssl_header_layout"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#666666"/>
-    <ListView
-        android:id="@+id/display"
+
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
