@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/bt1"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:background="@color/black06"
+            android:text="PAGER 1" />
+
+        <TextView
+            android:id="@+id/bt2"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="12dp"
+            android:background="@color/black06"
+            android:gravity="center"
+            android:text="PAGER 2" />
+
+        <TextView
+            android:id="@+id/bt3"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="12dp"
+            android:background="@color/black06"
+            android:gravity="center"
+            android:text="PAGER 2" />
+
+        <TextView
+            android:id="@+id/bt4"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="12dp"
+            android:background="@color/black06"
+            android:gravity="center"
+            android:text="PAGER 2" />
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

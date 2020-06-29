@@ -35,6 +35,8 @@
         <activity android:name=".view.LotteryActivity"
             android:screenOrientation="landscape"/>
 
+        <activity android:name=".pager.PagerActivity"/>
+
         <service android:name=".server.BookService"
             android:enabled="true"
             android:exported="true">

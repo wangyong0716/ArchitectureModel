@@ -2,7 +2,11 @@ package com.archi.architecture.view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
+import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 import androidx.fragment.app.FragmentActivity;
 
 import com.archi.architecture.R;
@@ -32,16 +36,22 @@ public class LotteryActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lottery);
-        ButterKnife.bind(this);
 
-        readSSLotteries();
+        new AsyncLayoutInflater(LotteryActivity.this)
+                .inflate(R.layout.activity_lottery, null, new AsyncLayoutInflater.OnInflateFinishedListener() {
+                    @Override
+                    public void onInflateFinished(View view, int resid, ViewGroup parent) {
+                        setContentView(view);
+                        ButterKnife.bind(LotteryActivity.this);
+                        readSSLotteries();
 
-        mFragment = new SSDisplayFragmentNew();
+                        mFragment = new SSDisplayFragmentNew();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, mFragment).commit();
-        getSupportFragmentManager().beginTransaction().show(mFragment);
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, mFragment).commit();
+                        getSupportFragmentManager().beginTransaction().show(mFragment);
+                    }
+                });
     }
 
 
