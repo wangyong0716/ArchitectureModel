@@ -10,9 +10,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 import com.archi.architecture.lottery.net.LotteryFetcher;
 import com.archi.architecture.math.SortUtil;
+import com.archi.architecture.time.TimeMonitorConfig;
+import com.archi.architecture.time.TimeMonitorManager;
 import com.archi.architecture.view.LotteryActivity;
 import com.archi.database.async.AsyncThreadTask;
 import com.archi.database.common.CommonStoreTask;
@@ -27,6 +30,7 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     Fragment mFragment;
     private TextView displayArea;
+    private int mCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +48,38 @@ public class MainActivity extends AppCompatActivity {
         //mFragment = getSupportFragmentManager().findFragmentById(R.id.bt_fragment);
 
         displayArea = findViewById(R.id.display_area);
+
+        displayArea.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                if (mCount == 0) {
+                    TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).recordingTimeTag("MainActivity-onPreDraw-Over");
+                    mCount++;
+                }
+                return true;
+            }
+        });
+
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).recordingTimeTag("MainActivity-onCreate-Over");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).recordingTimeTag("MainActivity-onStart-Over");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         SortUtil.test();
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).recordingTimeTag("MainActivity-onResume-Over");
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        TimeMonitorManager.getInstance().getTimeMonitor(TimeMonitorConfig.TIME_MONITOR_ID_APPLICATION_START).recordingTimeTag("MainActivity-onWindowFocusChanged-Over");
     }
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
