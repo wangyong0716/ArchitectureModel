@@ -9,4 +9,11 @@
     </style>
 
 
+    <style name="AppTheme.MainActivityTheme1">
+        <item name="android:background">#000000</item>
+    </style>
+
+    <style name="AppTheme.MainActivityTheme2">
+        <item name="android:background">@null</item>
+    </style>
 </resources>

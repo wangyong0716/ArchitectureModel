@@ -25,7 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".BaseApplication">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.MainActivityTheme1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,6 +37,15 @@
             android:screenOrientation="landscape"/>
 
         <activity android:name=".pager.PagerActivity"/>
+
+        <activity android:name=".PreLoadDexActivity"
+            android:process=":preloaddex"
+            android:alwaysRetainTaskState= "false"
+            android:theme="@style/AppTheme.MainActivityTheme1"
+            android:launchMode= "singleTask"
+            android:excludeFromRecents= "true"
+            android:screenOrientation= "portrait"
+            />
 
         <service android:name=".server.BookService"
             android:enabled="true"
